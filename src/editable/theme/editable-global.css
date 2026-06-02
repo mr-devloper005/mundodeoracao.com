@@ -11,6 +11,10 @@
   Do not add data fetching, scripts, or route logic here.
 */
 
+:root {
+  --editable-container: 1180px;
+}
+
 body {
   background-color: var(--slot4-page-bg) !important;
   color: var(--slot4-page-text) !important;
@@ -41,4 +45,59 @@ body {
 
 .article-content a {
   color: var(--slot4-accent-fill);
+}
+
+.article-content {
+  color: var(--slot4-page-text);
+}
+
+.article-content > * {
+  max-width: 760px;
+}
+
+.article-content p {
+  margin-top: 1.25rem;
+}
+
+.article-content > p:first-child::first-letter {
+  float: left;
+  margin: 0.12em 0.16em 0 0;
+  color: #ff7a3d;
+  font-size: 4.4rem;
+  font-weight: 900;
+  line-height: 0.82;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  margin-top: 2.6rem;
+  color: var(--slot4-page-text);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.article-content h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.article-content h2 {
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+}
+
+.article-content h3 {
+  font-size: clamp(1.35rem, 2.3vw, 1.75rem);
+  font-style: italic;
+}
+
+.article-content ul,
+.article-content ol {
+  margin-top: 1.25rem;
+  max-width: 740px;
+  padding-left: 1.5rem;
+}
+
+.article-content li {
+  margin-top: 0.65rem;
 }
