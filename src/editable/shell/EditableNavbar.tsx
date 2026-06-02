@@ -8,7 +8,6 @@ import { SITE_CONFIG } from '@/lib/site-config'
 import { globalContent } from '@/editable/content/global.content'
 import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 import { getVisualPreset, visualSystem } from '@/editable/theme/visual-system'
-import { useEditableLocalAuthSession } from '@/editable/components/EditableLocalAuthForms'
 
 export function EditableNavbar() {
   const preset = getVisualPreset(visualSystem.recommendedPreset as any)
@@ -16,6 +15,8 @@ export function EditableNavbar() {
   const [mounted, setMounted] = useState(false)
   const { session, logout } = useEditableLocalAuthSession()
   const pathname = usePathname()
+  const siteName = globalContent.site.name
+  const activePath = mounted ? pathname : ''
   const navVars = { '--editable-nav-bg': preset.colors.background, '--editable-nav-text': preset.colors.foreground, '--editable-nav-active': preset.colors.foreground, '--editable-nav-active-text': preset.colors.background, '--editable-cta-bg': preset.colors.foreground, '--editable-cta-text': preset.colors.background, '--editable-search-bg': preset.colors.surface, '--editable-border': `${preset.colors.muted}33`, '--editable-container': '1440px' } as CSSProperties
   const navItems = useMemo(
     () => [...globalContent.nav.primaryLinks],
