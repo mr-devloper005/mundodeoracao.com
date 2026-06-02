@@ -55,7 +55,7 @@ function pageHref(basePath: string, category: string, page: number) {
 }
 
 const taskDeck: Record<TaskKey, { icon: typeof FileText; archiveClass: string; promise: string; badge: string }> = {
-  article: { icon: FileText, archiveClass: 'grid gap-5 md:grid-cols-2 xl:grid-cols-3', promise: 'Readable editorial cards with room for headlines and excerpts.', badge: 'Read' },
+  article: { icon: FileText, archiveClass: 'grid gap-4', promise: 'Readable article rows with comfortable excerpts, topic context, and no stretched text.', badge: 'Read' },
   listing: { icon: Building2, archiveClass: 'grid gap-5 xl:grid-cols-2', promise: 'Directory cards highlight company identity, location, contacts, and service details.', badge: 'Business' },
   classified: { icon: Megaphone, archiveClass: 'grid gap-5 xl:grid-cols-2', promise: 'Offer-board cards prioritize price, location, condition, and quick action.', badge: 'Offer' },
   image: { icon: Camera, archiveClass: 'columns-1 gap-5 space-y-5 md:columns-2 xl:columns-3', promise: 'Gallery-first browsing with strong visuals and compact captions.', badge: 'Gallery' },
@@ -95,27 +95,42 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
   return (
     <EditableSiteShell>
       <main style={archiveVars} className="bg-[var(--archive-bg)] text-[var(--archive-text)]">
-        <section className="mx-auto grid max-w-[var(--editable-container)] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
-          <div className="rounded-[2.5rem] border border-[var(--editable-border)] bg-[var(--archive-surface)] p-7 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-10">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--editable-border)] bg-white/70 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-[var(--archive-accent)]"><Icon className="h-4 w-4" /> {label}</div>
-            <h1 className="mt-5 max-w-4xl text-5xl font-black leading-[0.95] tracking-[-0.07em] sm:text-6xl">{voice?.headline || `Browse ${label}`}</h1>
+        <section className="mx-auto grid max-w-[var(--editable-container)] gap-6 px-4 py-10 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-14">
+          <div className="rounded-lg border border-[var(--editable-border)] bg-[var(--archive-surface)] p-6 shadow-[0_18px_55px_rgba(15,23,42,0.08)] sm:p-8">
+            <div className="inline-flex items-center gap-2 rounded-md border border-[var(--editable-border)] bg-white/70 px-3 py-2 text-xs font-black uppercase tracking-[0.18em] text-[var(--archive-accent)]"><Icon className="h-4 w-4" /> {voice?.eyebrow || label}</div>
+            <h1 className="mt-5 max-w-4xl text-4xl font-black leading-tight tracking-tight sm:text-5xl">{voice?.headline || `Browse ${label}`}</h1>
             <p className="mt-6 max-w-2xl text-base leading-8 opacity-70">{voice?.description || SITE_CONFIG.description}</p>
-            <div className="mt-6 rounded-[1.5rem] border border-[var(--editable-border)] bg-white/55 p-4 text-sm font-bold leading-7 opacity-75">{deck.promise}</div>
+            <div className="mt-6 rounded-md border border-[var(--editable-border)] bg-white/55 p-4 text-sm font-bold leading-7 opacity-75">{deck.promise}</div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href={basePath} className="rounded-full bg-[var(--archive-text)] px-5 py-3 text-sm font-black text-[var(--archive-bg)]">Browse all</Link>
-              <Link href="/search" className="rounded-full border border-[var(--editable-border)] px-5 py-3 text-sm font-black">Search posts</Link>
+              <Link href={basePath} className="rounded-md bg-[var(--archive-text)] px-5 py-3 text-sm font-black text-[var(--archive-bg)]">Browse all</Link>
+              <Link href="/search" className="rounded-md border border-[var(--editable-border)] px-5 py-3 text-sm font-black">Search articles</Link>
             </div>
           </div>
 
-          <form action={basePath} className="self-end rounded-[2rem] border border-[var(--editable-border)] bg-white/70 p-5 shadow-sm backdrop-blur">
-            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] opacity-55"><Filter className="h-4 w-4" /> Filter</div>
-            <select name="category" defaultValue={category} className="mt-4 h-12 w-full rounded-2xl border border-[var(--editable-border)] bg-white px-4 text-sm font-bold outline-none">
-              <option value="all">All categories</option>
-              {CATEGORY_OPTIONS.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
-            </select>
-            <button className="mt-3 h-12 w-full rounded-2xl bg-[var(--archive-text)] text-sm font-black text-[var(--archive-bg)]">Apply</button>
-            <p className="mt-3 text-xs font-bold opacity-55">Showing: {categoryLabel}</p>
-          </form>
+          <div className="grid gap-4">
+            <section className="rounded-lg border border-[var(--editable-border)] bg-white p-5 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] opacity-55"><MapPin className="h-4 w-4" /> Browse topics</div>
+              <h2 className="mt-4 text-lg font-black">Quick category entry</h2>
+              <p className="mt-3 text-sm leading-6 opacity-70">Jump straight into an editorial topic and find the stories that matter most.</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {CATEGORY_OPTIONS.slice(0, 6).map((item) => (
+                  <Link key={item.slug} href={`${basePath}?category=${item.slug}`} className="rounded-full border border-[var(--editable-border)] px-3 py-2 text-xs font-black transition hover:bg-[var(--archive-text)] hover:text-[var(--archive-bg)]">
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            <form action={basePath} className="rounded-lg border border-[var(--editable-border)] bg-white p-5 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.2em] opacity-55"><Filter className="h-4 w-4" /> Filter</div>
+              <select name="category" defaultValue={category} className="mt-4 h-12 w-full rounded-md border border-[var(--editable-border)] bg-white px-4 text-sm font-bold outline-none">
+                <option value="all">All categories</option>
+                {CATEGORY_OPTIONS.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
+              </select>
+              <button className="mt-3 h-12 w-full rounded-md bg-[var(--archive-text)] text-sm font-black text-[var(--archive-bg)]">Apply</button>
+              <p className="mt-3 text-xs font-bold opacity-55">Showing: {categoryLabel}</p>
+            </form>
+          </div>
         </section>
 
         <section className="mx-auto max-w-[var(--editable-container)] px-4 pb-16 sm:px-6 lg:px-8">
@@ -124,7 +139,7 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
               {posts.map((post, index) => <ArchivePostCard key={post.id || post.slug} post={post} task={task} basePath={basePath} index={index} />)}
             </div>
           ) : (
-            <div className="rounded-[2rem] border border-dashed border-[var(--editable-border)] bg-white/60 p-10 text-center">
+            <div className="rounded-lg border border-dashed border-[var(--editable-border)] bg-white/60 p-10 text-center">
               <Search className="mx-auto h-8 w-8 opacity-45" />
               <h2 className="mt-4 text-3xl font-black tracking-[-0.05em]">No posts found</h2>
               <p className="mt-2 text-sm opacity-65">Try another category or refresh this page after publishing new content.</p>
@@ -132,9 +147,9 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
           )}
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            {pagination.hasPrevPage ? <Link href={pageHref(basePath, category, page - 1)} className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black">Previous</Link> : null}
-            <span className="rounded-full bg-[var(--archive-text)] px-5 py-3 text-sm font-black text-[var(--archive-bg)]">Page {page} of {pagination.totalPages || 1}</span>
-            {pagination.hasNextPage ? <Link href={pageHref(basePath, category, page + 1)} className="rounded-full border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black">Next</Link> : null}
+            {pagination.hasPrevPage ? <Link href={pageHref(basePath, category, page - 1)} className="rounded-md border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black">Previous</Link> : null}
+            <span className="rounded-md bg-[var(--archive-text)] px-5 py-3 text-sm font-black text-[var(--archive-bg)]">Page {page} of {pagination.totalPages || 1}</span>
+            {pagination.hasNextPage ? <Link href={pageHref(basePath, category, page + 1)} className="rounded-md border border-[var(--editable-border)] bg-white px-5 py-3 text-sm font-black">Next</Link> : null}
           </div>
         </section>
       </main>
@@ -157,15 +172,16 @@ function ArticleArchiveCard({ post, href, index }: { post: SitePost; href: strin
   const image = getImage(post)
   const category = getCategory(post, 'Article')
   return (
-    <Link href={href} className="group overflow-hidden rounded-[2rem] border border-[var(--editable-border)] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative aspect-[4/3] overflow-hidden bg-black/5">
+    <Link href={href} className="group grid overflow-hidden rounded-lg border border-[var(--editable-border)] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl md:grid-cols-[260px_minmax(0,1fr)]">
+      <div className="relative aspect-[16/10] overflow-hidden bg-black/5 md:aspect-auto md:min-h-[190px]">
         <img src={image} alt="" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
-        <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">{category}</span>
+        <span className="absolute left-4 top-4 rounded-md bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em]">{category}</span>
       </div>
-      <div className="p-5">
-        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[var(--archive-accent)]">Story {String(index + 1).padStart(2, '0')}</p>
-        <h2 className="mt-2 text-xl font-black leading-tight tracking-[-0.04em]">{post.title}</h2>
+      <div className="p-5 md:p-6">
+        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[var(--archive-accent)]">Article {String(index + 1).padStart(2, '0')}</p>
+        <h2 className="mt-2 text-2xl font-black leading-tight tracking-tight">{post.title}</h2>
         <p className="mt-3 line-clamp-3 text-sm leading-6 opacity-65">{getSummary(post)}</p>
+        <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[var(--archive-accent)]">Read article <ArrowRight className="h-4 w-4" /></span>
       </div>
     </Link>
   )

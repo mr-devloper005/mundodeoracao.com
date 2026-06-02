@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { BookOpenText, PenLine, UserRoundCheck } from 'lucide-react'
 import { buildPageMetadata } from '@/lib/seo'
+import { pagesContent } from '@/editable/content/pages.content'
 import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
 import { EditableLocalSignupForm } from '@/editable/components/EditableLocalAuthForms'
-import { pagesContent } from '@/editable/content/pages.content'
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({ path: '/signup', title: 'Sign up', description: pagesContent.auth.signup.metadataDescription })
