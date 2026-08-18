@@ -4,6 +4,7 @@ import { BookOpenText, MessageSquareText, PenLine, ShieldCheck } from 'lucide-re
 import { pagesContent } from '@/editable/content/pages.content'
 import { EditableContactLeadForm } from '@/editable/components/EditableContactLeadForm'
 import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
+import { editableDesignContract as dc, editablePalette as pal } from '@/editable/layouts/design-contract'
 
 export default function ContactPage() {
   const lanes = [
@@ -14,27 +15,27 @@ export default function ContactPage() {
 
   return (
     <EditableSiteShell>
-      <main className="mx-auto max-w-[1180px] px-4 py-12 sm:px-6 lg:px-8">
+      <main className={`${dc.shell.section} ${dc.shell.sectionY}`}>
         <section className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] opacity-70">{pagesContent.contact.eyebrow}</p>
-            <h1 className="mt-4 text-4xl font-black leading-tight tracking-tight sm:text-5xl">{pagesContent.contact.title}</h1>
-            <p className="mt-5 max-w-2xl text-sm leading-8 text-[var(--slot4-muted-text)]">{pagesContent.contact.description}</p>
+            <p className={dc.type.eyebrow + ' opacity-70'}>{pagesContent.contact.eyebrow}</p>
+            <h1 className={dc.type.heroTitle + ' mt-4'}>{pagesContent.contact.title}</h1>
+            <p className={`mt-5 max-w-2xl text-sm leading-8 ${pal.mutedText}`}>{pagesContent.contact.description}</p>
             <div className="mt-8 space-y-4">
               {lanes.map((lane) => (
-                <div key={lane.title} className="rounded-lg border border-[var(--editable-border)] bg-white p-5 shadow-sm">
+                <div key={lane.title} className={`${dc.surface.card} p-5`}>
                   <lane.icon className="h-5 w-5" />
-                  <h2 className="mt-3 text-xl font-black">{lane.title}</h2>
-                  <p className="mt-2 text-sm leading-7 text-[var(--slot4-muted-text)]">{lane.body}</p>
+                  <h2 className="mt-3 text-xl font-extrabold">{lane.title}</h2>
+                  <p className={`mt-2 text-sm leading-7 ${pal.mutedText}`}>{lane.body}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-lg border border-[var(--editable-border)] bg-white p-6 shadow-sm">
+          <div className={`${dc.surface.card} p-6`}>
             <div className="mb-5 flex items-center gap-3">
-              <BookOpenText className="h-6 w-6 text-[var(--slot4-accent)]" />
-              <h2 className="text-2xl font-black">{pagesContent.contact.formTitle}</h2>
+              <BookOpenText className={`h-6 w-6 ${pal.accentText}`} />
+              <h2 className="text-2xl font-extrabold">{pagesContent.contact.formTitle}</h2>
             </div>
             <EditableContactLeadForm />
           </div>

@@ -34,7 +34,7 @@ export function EditableContactLeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-lg border border-[var(--editable-border)] bg-white p-5 shadow-sm md:p-6">
+    <form onSubmit={handleSubmit} className="rounded-lg border border-black/[0.08] bg-[var(--slot4-surface-bg)] p-5 shadow-sm md:p-6">
       <div className="grid gap-4 md:grid-cols-2">
         <Field name="name" label="Full name" placeholder="Your name" required />
         <Field name="email" type="email" label="Email address" placeholder="you@example.com" required />
@@ -43,9 +43,9 @@ export function EditableContactLeadForm() {
         <Field name="phone" label="Phone number" placeholder="Optional" />
         <Field name="subject" label="Subject" placeholder="How can we help?" />
       </div>
-      <label className="mt-4 grid gap-2 text-sm font-black opacity-75">
+      <label className="mt-4 grid gap-2 text-sm font-extrabold opacity-75">
         Message
-        <textarea name="message" required rows={6} placeholder="Tell us about the article, topic, correction, or publishing question..." className="rounded-md border border-[var(--editable-border)] bg-white px-4 py-3 text-base font-medium outline-none transition focus:border-[var(--slot4-accent)]" />
+        <textarea name="message" required rows={6} placeholder="Tell us about the article, topic, correction, or publishing question..." className="rounded-md border border-black/[0.08] bg-[var(--slot4-surface-bg)] px-4 py-3 text-base font-medium outline-none transition focus:border-[var(--slot4-accent)]" />
       </label>
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {message ? (
@@ -54,7 +54,7 @@ export function EditableContactLeadForm() {
           <span>{message}</span>
         </div>
       ) : null}
-      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-[var(--slot4-dark-bg)] px-6 text-sm font-black uppercase tracking-[0.16em] text-white shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70">
+      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-[var(--slot4-dark-bg)] px-6 text-sm font-extrabold uppercase tracking-[0.16em] text-white shadow-lg transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70">
         {status === 'submitting' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         Send message
       </button>
@@ -64,9 +64,9 @@ export function EditableContactLeadForm() {
 
 function Field({ name, label, type = 'text', placeholder, required = false }: { name: string; label: string; type?: string; placeholder?: string; required?: boolean }) {
   return (
-    <label className="grid gap-2 text-sm font-black opacity-75">
+    <label className="grid gap-2 text-sm font-extrabold opacity-75">
       {label}
-      <input name={name} type={type} required={required} placeholder={placeholder} className="h-12 rounded-md border border-[var(--editable-border)] bg-white px-4 text-base font-medium outline-none transition focus:border-[var(--slot4-accent)]" />
+      <input name={name} type={type} required={required} placeholder={placeholder} className="h-12 rounded-md border border-black/[0.08] bg-[var(--slot4-surface-bg)] px-4 text-base font-medium outline-none transition focus:border-[var(--slot4-accent)]" />
     </label>
   )
 }
