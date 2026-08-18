@@ -294,7 +294,7 @@ function ListingDetail({ post, related }: { post: SitePost; related: SitePost[] 
         <aside className="space-y-5">
           {mapSrc ? <MapBox src={mapSrc} label={address || post.title} /> : <ContactAction website={website} phone={phone} email={email} />}
           {mapSrc ? <ContactAction website={website} phone={phone} email={email} /> : null}
-          <RelatedPanel task="listing" post={post} related={related} compact />
+          <RelatedPanel task="listing" _post={post} related={related} compact />
         </aside>
       </div>
     </section>
@@ -329,7 +329,7 @@ function ClassifiedDetail({ post, related }: { post: SitePost; related: SitePost
         <ImageStrip images={images} label="Offer images" large />
         <BodyContent post={post} />
         <ContactAction website={website} phone={phone} email={email} />
-        <RelatedPanel task="classified" post={post} related={related} />
+        <RelatedPanel task="classified" _post={post} related={related} />
       </article>
     </section>
   )
@@ -356,7 +356,7 @@ function ImageDetail({ post, related }: { post: SitePost; related: SitePost[] })
           ))}
         </div>
       </div>
-      <div className="mt-10"><RelatedPanel task="image" post={post} related={related} /></div>
+      <div className="mt-10"><RelatedPanel task="image" _post={post} related={related} /></div>
     </section>
   )
 }
@@ -373,7 +373,7 @@ function BookmarkDetail({ post, related }: { post: SitePost; related: SitePost[]
         {website ? <Link href={website} target="_blank" rel="noreferrer" className="mt-8 inline-flex items-center gap-2 rounded-md bg-[var(--slot4-dark-bg)] px-5 py-3 text-sm font-extrabold text-[var(--slot4-page-bg)]">Open saved resource <ExternalLink className="h-4 w-4" /></Link> : null}
         <BodyContent post={post} />
       </article>
-      <RelatedPanel task="sbm" post={post} related={related} />
+      <RelatedPanel task="sbm" _post={post} related={related} />
     </section>
   )
 }
@@ -402,7 +402,7 @@ function PdfDetail({ post, related }: { post: SitePost; related: SitePost[] }) {
           </div>
         ) : null}
       </article>
-      <RelatedPanel task="pdf" post={post} related={related} />
+      <RelatedPanel task="pdf" _post={post} related={related} />
     </section>
   )
 }
@@ -426,7 +426,7 @@ function ProfileDetail({ post, related }: { post: SitePost; related: SitePost[] 
       <article className="rounded-lg border border-black/[0.08] bg-[var(--slot4-surface-bg)] p-7 shadow-sm sm:p-10">
         <BodyContent post={post} />
         <ImageStrip images={images.slice(1)} label="Profile gallery" />
-        <RelatedPanel task="profile" post={post} related={related} />
+        <RelatedPanel task="profile" _post={post} related={related} />
       </article>
     </section>
   )
